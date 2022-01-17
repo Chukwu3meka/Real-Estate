@@ -12,7 +12,6 @@ module.exports = {
     FIREBASE_PRIVATE_KEY: "",
     GA_TRACKING_ID: "",
   },
-  target: "serverless",
   images: {
     domains: ["platform-lookaside.fbsbx.com", "firebasestorage.googleapis.com", "scontent-atl3-2.xx.fbcdn.net"],
   },
