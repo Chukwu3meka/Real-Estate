@@ -1,19 +1,12 @@
-import Head from "next/head";
 import PropTypes from "prop-types";
-import { Provider } from "react-redux";
-import config from "react-reveal/globals";
 import { useEffect, useState } from "react";
-import { SnackbarProvider } from "notistack";
-import { ThemeProvider } from "@mui/material/styles";
 
-import muiTheme from "@source/theme";
 import { useStore } from "@redux/index";
 import LayoutContainer from "@component/layout";
+import Head from "next/head";
 
 const App = ({ Component, pageProps }) => {
-  config({ ssrFadeout: true });
-  const store = useStore(pageProps.initialReduxState),
-    [online, setOnline] = useState(true);
+  const store = useStore(pageProps.initialReduxState);
 
   const quote = "Real Estate",
     title = `ViewCrunch Real Estate`,
@@ -22,12 +15,6 @@ const App = ({ Component, pageProps }) => {
     keywords = "viewcrunch, Real Estate",
     currentUrl = "https://www.viewcrunch.com",
     image = "https://www.viewcrunch.com/images/ViewCrunch.webp";
-
-  useEffect(() => {
-    // store.dispatch(setOnlineAction(window.navigator.onLine));
-    // setOnline(window.navigator.onLine);
-    setOnline(true);
-  });
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -39,7 +26,6 @@ const App = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>{title}</title>
-
         <meta property="title" content={title} key="title" />
         <meta property="quote" content={quote} key="quote" />
         <meta property="image" content={image} key="image" />
@@ -86,24 +72,14 @@ const App = ({ Component, pageProps }) => {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
-
-      <ThemeProvider theme={muiTheme}>
-        <Provider store={store}>
-          <SnackbarProvider maxSnack={1} preventDuplicate>
-            <LayoutContainer>
-              <Component {...pageProps} />
-              <LayoutContainer {...{ pageProps, Component, store }} />;
-            </LayoutContainer>
-          </SnackbarProvider>
-        </Provider>
-      </ThemeProvider>
+      <LayoutContainer {...{ pageProps, Component, store }} />
     </>
   );
 };
-
-export default App;
 
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default App;
