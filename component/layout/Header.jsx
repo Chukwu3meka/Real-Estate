@@ -8,9 +8,9 @@ const Header = ({ displayHeader }) => (
       <Typography component="h1">Real Estate</Typography>
     </Link>
     <nav>
-      {["home", "land", "office", "hotel", "factory"].map((x) => (
-        <Link href="/">
-          <a key={x}>{x.toUpperCase()}</a>
+      {["home", "land", "office", "hotel", "factory"].map((target) => (
+        <Link href="/" key={target}>
+          <a key={target}>{target.toUpperCase()}</a>
         </Link>
       ))}
     </nav>
